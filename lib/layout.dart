@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:purchase_list_app/pages/settings.dart';
+import 'package:purchase_list_app/widgets/HomeList.dart';
 import 'pages/about.dart';
 import 'pages/home.dart';
 
@@ -41,7 +42,7 @@ class Layout {
     );
   }
 
-  static List<Widget> _getActions(context){
+  static List<Widget> _getActions(BuildContext context){
     List<Widget> items = List<Widget>();
 
     //fora da pagina home não mostra ação alguma
@@ -91,8 +92,17 @@ class Layout {
                     color: Layout.primary(),
                     child: Text('Adicionar ', style: TextStyle(color: Layout.light()),),
                     onPressed: () {
-                      print(_c.text);
-                      Navigator.of(ctx).pop();
+
+                      HomeList.items.add(
+                          ListTile(
+                            leading: Icon(Icons.pages),
+                            title: Text(_c.text),
+                            trailing: Icon(Icons.more_vert),
+                          )
+                      );
+
+                      //'Atualiza a página'
+                      Navigator.of(ctx).popAndPushNamed(HomePage.tag);
                     },
                   )
                 ],
